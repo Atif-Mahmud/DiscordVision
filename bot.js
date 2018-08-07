@@ -87,7 +87,7 @@ bot.on('message', (message) => {
 })
 
 async function updateEmbed(url, id){
-    let result = await getEmbed(url);
+    let result = await getEmbed(url, id);
     updateTitle(result.title);
     updateImage(result.image);
     updateSummary(result.summary);
@@ -95,9 +95,10 @@ async function updateEmbed(url, id){
     bot.channels.get(id).send({ embed });
 }
 
-async function getEmbed(url) {
+async function getEmbed(url, id) {
     const description = client.labelDetection(url)
         .then(results => results[0].labelAnnotations[0].description)
+        .catch(err => bot.channel.get(id).send("Uh oh, I'm not quite sure what that is... sorry :sweat_smile:"));
 
     const page = description.then(description => {
             return wiki().find(description);
