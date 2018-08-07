@@ -65,6 +65,18 @@ bot.on('message', (message) => {
 
                 updateEmbed(message.attachments.first().proxyURL, message.channel.id);
 
+            } else if (message.attachments.every((a) => a.url.indexOf("PNG", a.url.length - 3) !== -1)) {
+
+                updateEmbed(message.attachments.first().proxyURL, message.channel.id);
+
+            } else if (message.attachments.every((a) => a.url.indexOf("JPEG", a.url.length - 3) !== -1)) {
+
+                updateEmbed(message.attachments.first().proxyURL, message.channel.id);
+
+            } else if (message.attachments.every((a) => a.url.indexOf("JPG", a.url.length - 3) !== -1)) {
+
+                updateEmbed(message.attachments.first().proxyURL, message.channel.id);
+
             } else {
 
                 message.channel.send("Sorry mate, no image to be found in that last message.")
