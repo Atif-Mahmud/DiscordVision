@@ -1,0 +1,13 @@
+{
+  "name": "discordvision",
+  "version": "1.0.0",
+  "description": "A discord bot that leverages google cloud vision to classify and return wikipedia articles for the images you send it.",
+  "main": "bot.js",
+  "author": "Atif Mahmud",
+  "dependencies": {
+    "@google-cloud/vision": "^0.21.0",
+    "discord.js": "^11.3.2",
+    "wikijs": "^4.8.1",
+    "winston": "^3.0.0"
+  }
+}
