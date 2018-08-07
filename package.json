@@ -7,6 +7,7 @@
   "dependencies": {
     "@google-cloud/vision": "^0.21.0",
     "discord.js": "^11.3.2",
+    "giphy-js-sdk-core": "^1.0.5",
     "wikijs": "^4.8.1",
     "winston": "^3.0.0"
   }
