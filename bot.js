@@ -120,7 +120,11 @@ bot.on('message', (message) => {
                                     }
                                 ]
                             }
-                        });
+                        })
+                            .catch((err) => {
+                                message.channel.send("Oops! We couldn't find a Gif for that. Sorry :sweat_smile:");
+                                console.error(err);
+                            })
                     });
                 })
                 .catch((err) => {
