@@ -10,7 +10,7 @@ gif = GphApiClient(auth.gif);
 // Embed
 var embed = {
   "title": "",
-  "description": "Brought to you by Google Cloud Vision and Wikipedia",
+  "description": "Brought to you by *Google Cloud Vision* and *Wikipedia*",
   "color": 16131707,
   "footer": {
     "icon_url": "https://i.imgur.com/phdXsV7.jpg",
@@ -94,8 +94,8 @@ bot.on('message', (message) => {
                         console.log(gifObject);
                         message.channel.send({
                             embed: {
-                                "title": param,
-                                "description": "Brought to you by Giphy",
+                                "title": "**" + param.replace(/^\w/, c => c.toUpperCase()) + "**",
+                                "description": "Brought to you by *Giphy*",
                                 "color": 16131707,
                                 "footer": {
                                     "icon_url": "https://i.imgur.com/phdXsV7.jpg",
