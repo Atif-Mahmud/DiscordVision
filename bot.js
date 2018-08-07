@@ -82,6 +82,7 @@ bot.on('message', (message) => {
             } else {
 
                 message.channel.send("Sorry mate, no image to be found in that last message.")
+                message.channel.send("Try using `!dv help` for appropriate usage.")
 
             }
         }
@@ -91,7 +92,6 @@ bot.on('message', (message) => {
             gif.search('gifs', { "q": param , "limit": 1})
                 .then((response) => {
                     response.data.forEach((gifObject) => {
-                        console.log(gifObject);
                         message.channel.send({
                             embed: {
                                 "title": "**" + param.replace(/^\w/, c => c.toUpperCase()) + "**",
@@ -127,6 +127,35 @@ bot.on('message', (message) => {
                     message.channel.send("Oops! Something went wrong. Sorry :sweat_smile:");
                     console.error(err);
                 })
+        }
+
+        if (message.content.includes('help')) {
+            message.channel.send({
+                embed: {
+                    "title": "** DiscordVision HELP **",
+                    "description": "DiscordVision is a machine vision and image search app for discord!",
+                    "color": 16131707,
+                    "footer": {
+                        "icon_url": "https://i.imgur.com/phdXsV7.jpg",
+                        "text": "DiscordVision by Atif Mahmud"
+                    },
+                    "author": {
+                        "name": "DiscordVision",
+                        "url": "https://github.com/Atif-Mahmud",
+                        "icon_url": "https://i.imgur.com/phdXsV7.jpg"
+                    },
+                    "fields": [
+                        {
+                            "name": "Image Classification :mag:",
+                            "value": "To classify any image, upload it to any channel with the caption `!dv`. DiscordVision will try its best to figure out what it is and give you a summary."
+                        },
+                        {
+                            "name": "Gif Searching :frame_photo:",
+                            "value": "To look for an appropriate gif to match the current mood, use `!dv search [query parameter]` and DiscordVision will find the best gif it can."
+                        }
+                    ]
+                }
+            })
         }
     }
 })
