@@ -4,6 +4,8 @@ var logger = require('winston');
 const auth = require('./auth.json');
 const vision = require('@google-cloud/vision');
 const wiki = require('wikijs').default;
+var GphApiClient = require('giphy-js-sdk-core');
+gif = GphApiClient(auth.gif);
 
 // Embed
 var embed = {
@@ -82,6 +84,49 @@ bot.on('message', (message) => {
                 message.channel.send("Sorry mate, no image to be found in that last message.")
 
             }
+        }
+
+        if (message.content.includes('search')) {
+            let param = message.content.substring(10)
+            gif.search('gifs', { "q": param , "limit": 1})
+                .then((response) => {
+                    response.data.forEach((gifObject) => {
+                        console.log(gifObject);
+                        message.channel.send({
+                            embed: {
+                                "title": param,
+                                "description": "Brought to you by Giphy",
+                                "color": 16131707,
+                                "footer": {
+                                    "icon_url": "https://i.imgur.com/phdXsV7.jpg",
+                                    "text": "DiscordVision by Atif Mahmud"
+                                },
+                                "author": {
+                                    "name": "DiscordVision",
+                                    "url": "https://github.com/Atif-Mahmud",
+                                    "icon_url": "https://i.imgur.com/phdXsV7.jpg"
+                                },
+                                "image": {
+                                    "url": gifObject.images.original.gif_url
+                                },
+                                "fields": [
+                                    {
+                                        "name": "Source",
+                                        "value": gifObject.source
+                                    },
+                                    {
+                                        "name": "Rating",
+                                        "value": gifObject.rating
+                                    }
+                                ]
+                            }
+                        });
+                    });
+                })
+                .catch((err) => {
+                    message.channel.send("Oops! Something went wrong. Sorry :sweat_smile:");
+                    console.error(err);
+                })
         }
     }
 })
